@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-5">
             <h3 class="text-center">Update Subscription</h3>
-            <form @submit.prevent="onUpdateSubmit">
+            <form @submit.prevent="onUpdateForm">
                 <div class="form-group">
                     <label>Name</label>
                     <input type="text" class="form-control" v-model="subscription.name" required>
@@ -31,7 +31,7 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-primary btn-block" @click="updateSubscription">Update Subscription</button>
+                    <button class="btn btn-primary btn-block" @click="UpdateSubscription">Update Subscription</button>
                 </div>
                 </form>
         </div>
@@ -39,25 +39,33 @@
 </template>
 
 <script>
-import db  from '../firebaseDb';
+import db  from '../firebaseDb'
 export default {
-    data() {
-        return {
-            subscription: {}
-         }
-        },
-    methods: {
-        onUpdateSubmit(event) {
-            event.preventDefault()
-            db.collection('subscription').doc(this.$route.params.id).update(this.subscription)
-            .then(() => {
-                console.log("subscription successfully updated!");
-                this.$router.push('/list')
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        }
+  data() {
+    return {
+      subscription: {
+        name: "",
+        description: "",
+        amount: null,
+        frequency: ""
+      }
+    };
+  },
+
+  methods: {
+    onUpdateForm() {
+      const id = this.$route.params.id;
+      db.collection("subscriptions")
+        .doc(id)
+        .update(this.subscription)
+        .then(() => {
+          console.log("Subscription updated successfully!");
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
-}      
+  }
+};
 </script>
