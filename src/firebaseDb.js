@@ -3,12 +3,12 @@ import "firebase/firestore";
 
 
 const firebaseConfig = {
-    apiKey: 'AIzaSyAkkgp61a3BLK3ul-kVRtEuAcP1e6HHGGM',
-    authDomain: 'my-subscriptions-31d41.firebaseapp.com',
-    projectId: 'my-subscriptions-31d41',
-    storageBucket: 'my-subscriptions-31d41.appspot.com',
-    messagingSenderId: '717142103930',
-    appId: '1:717142103930:web:ac84149506b00a9ece68c3'
+    apiKey: 'AIzaSyA0s2Vr2qP_yWf1F1P6-c4PpYR-5kSLPU0',
+    authDomain: 'my-subscriptions-dc8bb.firebaseapp.com',
+    projectId: 'my-subscriptions-dc8bb',
+    storageBucket: 'my-subscriptions-dc8bb.appspot.com',
+    messagingSenderId: '859101869438',
+    appId: '1:859101869438:web:f1de2855880f7a93482f2f'
 }
 
 const db = firebase.initializeApp(firebaseConfig);

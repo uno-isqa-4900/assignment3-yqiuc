@@ -39,33 +39,33 @@
 </template>
 
 <script>
-import db  from '../firebaseDb'
-export default {
-  data() {
-    return {
-      subscription: {
-        name: "",
-        description: "",
-        amount: null,
-        frequency: ""
-      }
-    };
-  },
-
-  methods: {
-    onUpdateForm() {
-      const id = this.$route.params.id;
-      db.collection("subscriptions")
-        .doc(id)
-        .update(this.subscription)
-        .then(() => {
-          console.log("Subscription updated successfully!");
-          this.$router.push("/");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    import db from '../firebaseDb';
+    export default {
+      data() {
+            return {
+                subscription: {
+                }
+            }
+        },
+        created() {
+            let dbRef = db.collection('subscriptions').doc(this.$route.params.id);
+            dbRef.get().then((doc) => {
+                this.subscription = doc.data();
+            }).catch((error) => {
+                console.log(error)
+            })
+        },
+        methods: {
+            onUpdateForm(event) {
+                event.preventDefault()
+                db.collection('subscriptions').doc(this.$route.params.id)
+                .update(this.subscription).then(() => {
+                    console.log("Subscription successfully updated!");
+                    this.$router.push('/list')
+                }).catch((error) => {
+                    console.log(error);
+                });
+            }
+        }
     }
-  }
-};
 </script>
